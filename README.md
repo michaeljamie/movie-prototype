@@ -28,6 +28,6 @@
 
 #### Search Results with Pagination:
 
-![image](https://user-images.githubusercontent.com/26236137/227397788-9c728901-1998-449a-86cb-d3ef1460748a.png)
+![image](https://user-images.githubusercontent.com/26236137/227399166-313d4065-f60e-4f7f-8bc6-413781d540d0.png)
 
 ###### Note: Ideally developers would create a free account with the Movie DB and register an API Key.  I committed mine for convenience.

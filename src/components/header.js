@@ -4,10 +4,11 @@ import { setMoviesList, changeSearchTerm } from '../store';
 
 function Header() {
     const dispatch = useDispatch();
-    const { page, searchTerm } = useSelector((state) => {
+    const { page, searchTerm, moviesList } = useSelector((state) => {
         return {
           page: state.form.page,
-          searchTerm: state.movies.searchTerm
+          searchTerm: state.movies.searchTerm,
+          moviesList: state.movies.moviesList,
         }
       });
 
@@ -17,6 +18,9 @@ function Header() {
 
     const clearSearch = () => {
         dispatch(changeSearchTerm(''));
+        if(moviesList && moviesList.length > 0){
+            dispatch(setMoviesList([]));
+        }
     }
 
     const handleMovieSearch = (event) => {
@@ -39,7 +43,7 @@ function Header() {
                 <h3>MOVIE FINDER</h3>
             </header>
             <div className="">
-            <form onSubmit={handleMovieSearch} className="flex items-center">   
+            <form onSubmit={handleMovieSearch} className="flex items-center mb-4">   
                 <label className="sr-only">Search</label>
                 <div className="relative w-full">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -53,11 +57,11 @@ function Header() {
                         id="simple-search" 
                         className="bg-white border border-charcoal text-gray text-sm rounded-lg focus:ring-blue focus:border-black block w-full pl-10 p-2.5  dark:bg-charcoal dark:border-gray dark:placeholder-white dark:text-white dark:focus:ring-blue dark:focus:border-gray dark:focus:outline-0" />
                 </div>
-                <button type="submit" className="p-2.5 ml-2 text-sm font-medium text-white bg-blue rounded-lg border border-blue hover:bg-blue focus:ring-4 focus:outline-none focus:ring-blue dark:bg-blue dark:hover:bg-blue dark:focus:ring-blue">
+                <button type="submit" className="p-2.5 ml-2 text-sm font-medium text-white bg-blue rounded-lg border border-blue hover:bg-blue focus:ring-4 focus:outline-none focus:ring-blue dark:bg-blue dark:hover:bg-blue dark:focus:ring-blue transition-all">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     <span className="sr-only">Search</span>
                 </button>
-                <button onClick={clearSearch} className="p-2.5 ml-2 text-sm font-medium text-white bg-blue rounded-lg border border-blue hover:bg-blue focus:ring-4 focus:outline-none focus:ring-blue dark:bg-blue dark:hover:bg-blue dark:focus:ring-blue">
+                <button onClick={clearSearch} className="p-2.5 ml-2 text-sm font-medium text-white bg-blue rounded-lg border border-blue hover:bg-blue focus:ring-4 focus:outline-none focus:ring-blue dark:bg-blue dark:hover:bg-blue dark:focus:ring-blue transition-all">
                     <IoMdClose size="20px" />
                     <span className="sr-only">Clear</span>
                 </button>

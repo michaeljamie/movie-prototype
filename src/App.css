@@ -1,3 +1,13 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.cardList {
+    max-height: 66vh;
+}
+
+@media screen and (max-width: 1550px) and (max-height: 800px) {
+    .cardList {
+        max-height: 55vh;
+    }
+}

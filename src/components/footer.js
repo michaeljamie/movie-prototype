@@ -20,8 +20,7 @@ function List() {
           dispatch(setMoviesList(res))
       };
       fetchData();
-  }
-
+  };
 
   const nextPage = (event) => {
     dispatch(changeScreen(paginationScreen + 1));
@@ -30,7 +29,8 @@ function List() {
         dispatch(changePage(page + 1));
         handleMovieSearch(event, page + 1);
       }
-  }
+  };
+  
   const prevPage = (event) => {
       dispatch(changeScreen(paginationScreen - 1));
       if(paginationScreen % 2 !== 0 && page > 1)
@@ -38,13 +38,13 @@ function List() {
         dispatch(changePage(page - 1));
         handleMovieSearch(event, page - 1);
       }
-  }
+  };
 
   return(
     <div className="">
       {totalMovies ? <div className="flex flex-col items-center py-4">
         <span className="text-sm text-gray-700 dark:text-light_gray">
-            Showing <span className="font-semibold text-gray dark:text-white">{paginationScreen * 10 - 9}</span> to <span className="font-semibold text-gray-900 dark:text-white">{paginationScreen * 10 < totalMovies ? paginationScreen * 10 : totalMovies}</span> of <span className="font-semibold text-gray-900 dark:text-white">{totalMovies}</span> Movies
+            Showing <span className="font-semibold text-gray dark:text-white">{paginationScreen * 10 - 9}</span> to <span className="font-semibold text-gray-900 dark:text-white">{paginationScreen * 10 < totalMovies ? paginationScreen * 10 : totalMovies}</span> of <span className="font-semibold text-gray-900 dark:text-white">{totalMovies}{totalMovies >= 10000 && '+'}</span> Movies
         </span>
         <div className="inline-flex mt-2 xs:mt-0">
           <button onClick={prevPage} disabled={paginationScreen === 1} className={`inline-flex items-center px-4 py-2 text-sm font-medium text-black bg-gray rounded-l hover:bg-gray dark:bg-charcoal dark:border-gray dark:text-white dark:hover:bg-light_gray dark:hover:text-white`}>

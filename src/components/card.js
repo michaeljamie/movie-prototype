@@ -1,4 +1,4 @@
-import { IoIosStar } from "react-icons/io"
+import { IoIosStar, IoIosAddCircleOutline, IoMdFilm } from "react-icons/io"
 import {useDispatch, useSelector} from "react-redux";
 import { setOwnedList } from '../store';
 
@@ -32,16 +32,21 @@ function Card({movie}) {
             <span>{movie.vote_average ? movie.vote_average.toFixed(1) : "7.0"}</span>
             <IoIosStar className="text-lg" />
         </div>
+        <div  type="button" onClick={() => handleOwnedAddition(movie.id)} className={` cursor-pointer absolute top-12 right-2 bg-neutral text-white rounded-full px-2 py-1 text-sm flex items-center gap-1`}>
+            <IoIosAddCircleOutline title="Add to owned" className="text-lg" />
+        </div>
+
+
         <div onClick={() => handleOwnedAddition(movie.id)} className="absolute left-0 top-0 h-16 w-16 cursor-pointer">
             <div
             className={`absolute transform -rotate-45 ${ownedList && ownedList.includes(movie.id) ? `bg-blue` : `bg-red`} text-center text-white font-semibold py-1 left-[-38px] top-[28px] w-[170px]`}>
-            {ownedList && ownedList.includes(movie.id) ? 'Owned' : 'Mark Owned'}
+            {ownedList && ownedList.includes(movie.id) ? 'Owned' : 'Wishlist'}
             </div>
         </div>
         <div className="p-4">
-            <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-white">{movie.title.length > 40 ? `${movie.title.substr(0, 40)}...` : movie.title}</h5>
+            <h5 title={movie.title} className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-white">{movie.title.length > 40 ? `${movie.title.substr(0, 40)}...` : movie.title}</h5>
             <p className="mb-4 text-base text-neutral dark:text-light_gray">{movie.release_date.split('-')[0]}</p>
-            <p className="mb-4 text-base text-neutral dark:text-white text-xs">{movie.overview.length > 100 ? `${movie.overview.substr(0, 100)}...` : movie.overview}</p>
+            <p title={movie.overview} className="mb-4 text-base text-neutral dark:text-white text-xs">{movie.overview.length > 100 ? `${movie.overview.substr(0, 100)}...` : movie.overview}</p>
         </div>
     </div>  
   )

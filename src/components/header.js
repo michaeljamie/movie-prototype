@@ -18,17 +18,18 @@ function Header() {
 
     const clearSearch = () => {
         dispatch(changeSearchTerm(''));
-        if(moviesList && moviesList.length > 0){
+        if(moviesList?.length > 0){
             dispatch(setMoviesList([]));
         }
     }
 
     const handleMovieSearch = (event) => {
+        dispatch(setMoviesList({results: null, total_results: null}));
         event.preventDefault();
         const fetchData = async () => {
             const req = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=6054c57cdd9075b04c98cadeafeffaa7&query=${searchTerm.toLowerCase()}&page=${page ? page : 1}&include_adult=false&limit=10`);
             const res = await req.json();
-            dispatch(setMoviesList(res))
+            dispatch(setMoviesList(res));
         };
         fetchData();
     }

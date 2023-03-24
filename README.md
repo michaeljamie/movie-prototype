@@ -1,12 +1,6 @@
 
 # Movie Finder Prototype
 
-### Initial Search:
-
-
-### Search Results with Pagination:
-
-
 ## Frameworks/Libraries
 - React
 - ReduxJS Toolkit

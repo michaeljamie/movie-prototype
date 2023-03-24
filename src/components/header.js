@@ -1,14 +1,15 @@
 import { IoMdClose } from "react-icons/io"
 import {useDispatch, useSelector} from "react-redux";
-import { setMoviesList, changeSearchTerm } from '../store';
+import { setMoviesList, changeSearchTerm, changeScreen, changePage } from '../store';
 
 function Header() {
     const dispatch = useDispatch();
-    const { page, searchTerm, moviesList } = useSelector((state) => {
+    const { page, searchTerm, moviesList, paginationScreen } = useSelector((state) => {
         return {
           page: state.form.page,
           searchTerm: state.movies.searchTerm,
           moviesList: state.movies.moviesList,
+          paginationScreen: state.form.paginationScreen,
         }
       });
 
@@ -18,16 +19,20 @@ function Header() {
 
     const clearSearch = () => {
         dispatch(changeSearchTerm(''));
+        paginationScreen > 1 && dispatch(changeScreen(1));
+        page > 1  && dispatch(changePage(1));
         if(moviesList?.length > 0){
             dispatch(setMoviesList([]));
         }
     }
 
     const handleMovieSearch = (event) => {
-        dispatch(setMoviesList({results: null, total_results: null}));
+        paginationScreen > 1 && dispatch(changeScreen(1));
+        page > 1  && dispatch(changePage(1));
+        moviesList && dispatch(setMoviesList({results: null, total_results: null}));
         event.preventDefault();
         const fetchData = async () => {
-            const req = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=6054c57cdd9075b04c98cadeafeffaa7&query=${searchTerm.toLowerCase()}&page=${page ? page : 1}&include_adult=false&limit=10`);
+            const req = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=6054c57cdd9075b04c98cadeafeffaa7&query=${searchTerm.toLowerCase()}&page=${1}&include_adult=false&limit=10`);
             const res = await req.json();
             dispatch(setMoviesList(res));
         };
